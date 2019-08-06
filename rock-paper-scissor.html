@@ -6,7 +6,7 @@
     </head>
     <body>
         <script>   
-        let randomNum = Math.floor(Math.random() * 3);  
+          
         function game() {
             let playerScore = 0;
             let compScore = 0;
@@ -14,6 +14,7 @@
                 let array = ["ROCK", "PAPER", "SCISSOR"];
                 let playerPrompt = prompt("Rock, paper or scissor?");
                 let playerSelection = playerPrompt.toUpperCase();
+                let randomNum = Math.floor(Math.random() * 3);
                 let computerSelection = array[randomNum];
 
                 console.log(">>Player: " + playerSelection);
@@ -28,9 +29,9 @@
                     } else if (((playerSelection === "ROCK") && (computerSelection === "SCISSOR")) || 
                              ((playerSelection === "SCISSOR") && (computerSelection === "PAPER")) || 
                              ((playerSelection === "PAPER") && (computerSelection === "ROCK"))) {
-                        message = "You win!";
+                        message = ("You win! " + playerSelection + " beats " + computerSelection);
                     } else {
-                        message = "You lose!";
+                        message = ("You lose! " + computerSelection + " beats " + playerSelection );
                     }
                     return message;
                 }
@@ -40,10 +41,10 @@
                     playerScore++ ;
                     compScore++ ;
                 }
-                if( result === "You win!") {
+                if( result === ("You win! " + playerSelection + " beats " + computerSelection) ) {
                     playerScore += 3;
                 }
-                if( result === "You lose!") {
+                if( result === "You lose! " + computerSelection + " beats " + playerSelection ) {
                     compScore += 3;
                 }
             }
