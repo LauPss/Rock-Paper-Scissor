@@ -6,8 +6,35 @@
     </head>
     <body>
         <script>
+        let array = ["ROCK", "PAPER", "SCISSOR"];
+        let playerPrompt = prompt("Rock, paper or scissor?");
+        let playerSelection = playerPrompt.toUpperCase();
+        let randomNum = Math.floor(Math.random() * 3);
+   
+        let computerPlay = (randomNum) => array[randomNum];
+        let computerSelection = computerPlay(randomNum);
+        
+console.log( "Player: " + playerSelection ) ;
+console.log( "Computer: " + computerSelection );
 
-            
+        function playRound(playerSelection, computerSelection) {
+            let message;            
+             if (playerSelection !== "ROCK" && playerSelection !== "PAPER" && playerSelection !== "SCISSOR") {
+                message = "Invalid input";
+            } else if (playerSelection === computerSelection) {
+                message = "Draw! Nobody wins!";
+             } else if (((playerSelection === "ROCK") && (computerSelection === "SCISSOR")) || 
+                         ((playerSelection === "SCISSOR") && (computerSelection === "PAPER")) || 
+                         ((playerSelection === "PAPER") && (computerSelection === "ROCK"))) {
+                message = "You win!";
+            } else {
+                message = "You lose!";
+            }
+            return message;
+        }
+
+console.log( playRound(playerSelection, computerSelection) );
+
         </script>
     </body>
 </html>
