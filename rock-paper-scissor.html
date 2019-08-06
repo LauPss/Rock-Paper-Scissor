@@ -5,35 +5,52 @@
         <title>Rock Paper Scissor!</title>
     </head>
     <body>
-        <script>
-        let array = ["ROCK", "PAPER", "SCISSOR"];
-        let playerPrompt = prompt("Rock, paper or scissor?");
-        let playerSelection = playerPrompt.toUpperCase();
-        let randomNum = Math.floor(Math.random() * 3);
-   
-        let computerPlay = (randomNum) => array[randomNum];
-        let computerSelection = computerPlay(randomNum);
-        
-console.log( "Player: " + playerSelection ) ;
-console.log( "Computer: " + computerSelection );
+        <script>   
+        let randomNum = Math.floor(Math.random() * 3);  
+        function game() {
+            let playerScore = 0;
+            let compScore = 0;
+            for( i = 0; i < 5; i++ ) {
+                let array = ["ROCK", "PAPER", "SCISSOR"];
+                let playerPrompt = prompt("Rock, paper or scissor?");
+                let playerSelection = playerPrompt.toUpperCase();
+                let computerSelection = array[randomNum];
 
-        function playRound(playerSelection, computerSelection) {
-            let message;            
-             if (playerSelection !== "ROCK" && playerSelection !== "PAPER" && playerSelection !== "SCISSOR") {
-                message = "Invalid input";
-            } else if (playerSelection === computerSelection) {
-                message = "Draw! Nobody wins!";
-             } else if (((playerSelection === "ROCK") && (computerSelection === "SCISSOR")) || 
-                         ((playerSelection === "SCISSOR") && (computerSelection === "PAPER")) || 
-                         ((playerSelection === "PAPER") && (computerSelection === "ROCK"))) {
-                message = "You win!";
-            } else {
-                message = "You lose!";
+                console.log(">>Player: " + playerSelection);
+                console.log(">>Computer: " + computerSelection);      
+
+                function playRound(playerSelection, computerSelection) {
+                    let message;            
+                    if (playerSelection !== "ROCK" && playerSelection !== "PAPER" && playerSelection !== "SCISSOR") {
+                        message = "Invalid input";
+                    } else if (playerSelection === computerSelection) {
+                        message = "Draw! Nobody wins!";
+                    } else if (((playerSelection === "ROCK") && (computerSelection === "SCISSOR")) || 
+                             ((playerSelection === "SCISSOR") && (computerSelection === "PAPER")) || 
+                             ((playerSelection === "PAPER") && (computerSelection === "ROCK"))) {
+                        message = "You win!";
+                    } else {
+                        message = "You lose!";
+                    }
+                    return message;
+                }
+                console.log( playRound(playerSelection,computerSelection) );
+                let result = ( playRound(playerSelection,computerSelection) ) ;
+                if( result === "Draw! Nobody wins!" ) {
+                    playerScore++ ;
+                    compScore++ ;
+                }
+                if( result === "You win!") {
+                    playerScore += 3;
+                }
+                if( result === "You lose!") {
+                    compScore += 3;
+                }
             }
-            return message;
+            return ( "GAME OVER! Player: " + playerScore + " Computer: " + compScore );
         }
 
-console.log( playRound(playerSelection, computerSelection) );
+        console.log( game() );
 
         </script>
     </body>
