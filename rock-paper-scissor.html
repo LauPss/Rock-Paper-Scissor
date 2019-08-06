@@ -7,15 +7,15 @@
     <body>
         <script>   
           
-        function game() {
+        function game() {   // 5-ROUNDS GAME OF ROCK PAPER SCISSOR
             let playerScore = 0;
             let compScore = 0;
-            for( i = 0; i < 5; i++ ) {
+            for( i = 0; i < 5; i++ ) { // 5-ROUNDS LOOP
                 let array = ["ROCK", "PAPER", "SCISSOR"];
                 let playerPrompt = prompt("Rock, paper or scissor?");
                 let playerSelection = playerPrompt.toUpperCase();
 
-                function computerPlay() {
+                function computerPlay() {  // GENERATES THE COMPUTER'S CHOICE
                     let randomNum = Math.floor(Math.random() * 3);
                     let pick = array[randomNum];
                     return pick;
@@ -23,10 +23,10 @@
 
                 let computerSelection = computerPlay();
 
-                console.log(">>Player: " + playerSelection);
+                console.log(">>Player: " + playerSelection); 
                 console.log(">>Computer: " + computerSelection);      
 
-                function playRound(playerSelection, computerSelection) {
+                function playRound(playerSelection, computerSelection) { // DETERMINES WHETHER YOU WON, TIED, INVALIDATED OR LOST THE ROUND
                     let message;            
                     if (playerSelection !== "ROCK" && playerSelection !== "PAPER" && playerSelection !== "SCISSOR") {
                         message = "Invalid input";
@@ -41,25 +41,23 @@
                     }
                     return message;
                 }
-                console.log( playRound(playerSelection,computerSelection) );
-                
+                console.log( playRound(playerSelection,computerSelection) ); // SHOWS ROUND RESULT ON CONSOLE
+
                 let result = ( playRound(playerSelection,computerSelection) ) ;
 
-                if( result === "Draw! Nobody wins!" ) {
+                if( result === "Draw! Nobody wins!" ) { // ASSIGNS A SCORE FOR EACH WIN, DRAW OR LOSS.
                     playerScore++ ;
                     compScore++ ;
-                }
-                if( result === ("You win! " + playerSelection + " beats " + computerSelection) ) {
+                } else if( result === ("You win! " + playerSelection + " beats " + computerSelection) ) {
                     playerScore += 3;
-                }
-                if( result === "You lose! " + computerSelection + " beats " + playerSelection ) {
+                } else if( result === "You lose! " + computerSelection + " beats " + playerSelection ) {
                     compScore += 3;
                 }
             }
             return ( "GAME OVER! Player: " + playerScore + " Computer: " + compScore );
         }
 
-        console.log( game() );
+        console.log( game() ); // SHOWS FINAL SCORE ON CONSOLE
 
         </script>
     </body>
