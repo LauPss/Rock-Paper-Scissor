@@ -1,64 +1,109 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>Rock Paper Scissor!</title>
-    </head>
-    <body>
-        <script>   
-          
-        function game() {   // 5-ROUNDS GAME OF ROCK PAPER SCISSOR
-            let playerScore = 0;
-            let compScore = 0;
-            for( i = 0; i < 5; i++ ) { // 5-ROUNDS LOOP
-                let array = ["ROCK", "PAPER", "SCISSOR"];
-                let playerPrompt = prompt("Rock, paper or scissor?");
-                let playerSelection = playerPrompt.toUpperCase();
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
-                function computerPlay() {  // GENERATES THE COMPUTER'S CHOICE
-                    let randomNum = Math.floor(Math.random() * 3);
-                    let pick = array[randomNum];
-                    return pick;
-                }
+<head>
+	<meta charset="UTF-8">
+    <title>Rock Paper Scissors!</title>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+	<meta name="generator" content="Geany 1.33" />
+</head>
 
-                let computerSelection = computerPlay();
+<body>
+	<h1>Rock Paper Scissors game</h1>
+	<p>Pick your choice...</p>
+	<button id='ROCK'>ROCK</button>
+	<button id='PAPER'>PAPER</button>
+	<button id='SCISSORS'>SCISSORS</button>	
 
-                console.log(">>Player: " + playerSelection); 
-                console.log(">>Computer: " + computerSelection);      
-
-                function playRound(playerSelection, computerSelection) { // DETERMINES WHETHER YOU WON, TIED, INVALIDATED OR LOST THE ROUND
-                    let message;            
-                    if (playerSelection !== "ROCK" && playerSelection !== "PAPER" && playerSelection !== "SCISSOR") {
-                        message = "Invalid input";
-                    } else if (playerSelection === computerSelection) {
-                        message = "Draw! Nobody wins!";
-                    } else if (((playerSelection === "ROCK") && (computerSelection === "SCISSOR")) || 
-                             ((playerSelection === "SCISSOR") && (computerSelection === "PAPER")) || 
-                             ((playerSelection === "PAPER") && (computerSelection === "ROCK"))) {
-                        message = ("You win! " + playerSelection + " beats " + computerSelection);
-                    } else {
-                        message = ("You lose! " + computerSelection + " beats " + playerSelection);
-                    }
-                    return message;
-                }
-                console.log( playRound(playerSelection,computerSelection) ); // SHOWS ROUND RESULT ON CONSOLE
-
-                let result = ( playRound(playerSelection,computerSelection) ) ;
-
-                if( result === "Draw! Nobody wins!" ) { // ASSIGNS A SCORE FOR EACH WIN, DRAW OR LOSS.
-                    playerScore++ ;
-                    compScore++ ;
-                } else if( result === ("You win! " + playerSelection + " beats " + computerSelection) ) {
-                    playerScore += 3;
-                } else if( result === "You lose! " + computerSelection + " beats " + playerSelection ) {
-                    compScore += 3;
-                }
-            }
-            return ( "GAME OVER! Player: " + playerScore + " Computer: " + compScore );
+<script>   
+	const rockButton = document.querySelector('#ROCK');
+	const paperButton = document.querySelector('#PAPER');
+	const scissorsButton = document.querySelector('#SCISSORS');
+	let playerScore = 0;
+	let compScore = 0
+	
+	let messageDiv = document.createElement("div");
+    document.body.appendChild(messageDiv);
+    
+    let playerCounter = document.createElement("p");
+    playerCounter.textContent = "YOUR POINTS: " + playerScore;
+	messageDiv.appendChild(playerCounter);   
+	
+	let computerCounter = document.createElement("p");	
+	computerCounter.textContent = "CPU\'S POINTS: " + compScore;
+	messageDiv.appendChild(computerCounter);
+	
+	let playerMessage = document.createElement("p");
+    messageDiv.appendChild(playerMessage);
+    
+    let computerMessage = document.createElement("p");
+    messageDiv.appendChild(computerMessage);
+    
+    let result = document.createElement("p");
+   	messageDiv.appendChild(result);
+   	
+   	let finalResult = document.createElement("p");
+   	messageDiv.appendChild(finalResult);
+   	
+	const buttons = document.querySelectorAll('button');
+	
+	function computerPlay() {
+        let array = ["ROCK", "PAPER", "SCISSORS"];
+        let randomNum = Math.floor(Math.random() * 3);
+        let pick = array[randomNum];
+        return pick;
+    }
+        
+    let playerSelection = "";
+	buttons.forEach((button) => {
+		button.addEventListener('click', (e) => {
+			playerSelection = button.getAttribute('id');
+			playerMessage.textContent = '> YOU: ' + button.id;
+			result.textContent = game();
+		});
+	}); 
+    
+    function playRound(playerSelection, computerSelection) {
+        let message;          
+		if (playerSelection === "") {
+			return;
+        } else if (playerSelection === computerSelection) {
+            message = "Draw! Nobody wins!";            
+        } else if (((playerSelection === "ROCK") && (computerSelection === "SCISSORS")) || 
+                   ((playerSelection === "SCISSORS") && (computerSelection === "PAPER")) || 
+                   ((playerSelection === "PAPER") && (computerSelection === "ROCK"))) {
+            message = ("You win! " + playerSelection + " beats " + computerSelection);
+            playerScore++;
+            if (playerScore === 5) {
+				let finalMessage = "GAME OVER! You: " + playerScore + " Computer: " + compScore + ". "; 
+				finalResult.textContent = finalMessage + "YOU WON, GG!";
+			}
+        } else {
+            message = ("You lose! " + computerSelection + " beats " + playerSelection);
+            compScore++;
+            if (compScore === 5) {
+				let finalMessage = "GAME OVER! You: " + playerScore + " Computer: " + compScore + ". "; 
+				finalResult.textContent = finalMessage + "YOU LOST, GIT GUD!";
+			}
         }
+        playerCounter.textContent = "YOUR POINTS: " + playerScore;
+		computerCounter.textContent = "CPU\'S POINTS: " + compScore;
+		return message;
+    }
+    
+    function game() {
+		if (playerScore === 5 || compScore === 5) {
+			return;
+		} else {
+			let computerSelection = computerPlay();
+			computerMessage.textContent = '> CPU: ' + computerSelection;
+			return playRound(playerSelection, computerSelection);
+		}
+	}    
 
-        console.log( game() ); // SHOWS FINAL SCORE ON CONSOLE
+ </script>	
+	
+</body>
 
-        </script>
-    </body>
 </html>

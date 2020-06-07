@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Rock Paper Scissor!</title>
+    </head>
+    <body>
+        <script>   
+          
+        function game() {   // 5-ROUNDS GAME OF ROCK PAPER SCISSOR
+            let playerScore = 0;
+            let compScore = 0;
+            for (i = 0; i < 5; i++) { // 5-ROUNDS LOOP
+                let array = ["ROCK", "PAPER", "SCISSORS"];
+                let playerPrompt = prompt("Rock, paper or scissors?");
+                let playerSelection = playerPrompt.toUpperCase();
+
+                function computerPlay() {  // GENERATES THE COMPUTER'S CHOICE
+                    let randomNum = Math.floor(Math.random() * 3);
+                    let pick = array[randomNum];
+                    return pick;
+                }
+
+                let computerSelection = computerPlay();
+
+                console.log(">>Player: " + playerSelection); 
+                console.log(">>Computer: " + computerSelection);      
+
+                function playRound(playerSelection, computerSelection) { // DETERMINES WHETHER YOU WON, TIED, INVALIDATED OR LOST THE ROUND
+                    let message;            
+                    if (playerSelection !== "ROCK" && playerSelection !== "PAPER" && playerSelection !== "SCISSORS") {
+                        message = "Invalid input";
+                    } else if (playerSelection === computerSelection) {
+                        message = "Draw! Nobody wins!";
+                    } else if (((playerSelection === "ROCK") && (computerSelection === "SCISSORS")) || 
+                             ((playerSelection === "SCISSORS") && (computerSelection === "PAPER")) || 
+                             ((playerSelection === "PAPER") && (computerSelection === "ROCK"))) {
+                        message = ("You win! " + playerSelection + " beats " + computerSelection);
+                    } else {
+                        message = ("You lose! " + computerSelection + " beats " + playerSelection);
+                    }
+                    return message;
+                }
+                console.log(playRound(playerSelection, computerSelection)); // SHOWS ROUND RESULT ON CONSOLE
+
+                let result = (playRound(playerSelection, computerSelection)) ;
+
+                if( result === "Draw! Nobody wins!" ) { // ASSIGNS A SCORE FOR EACH WIN, DRAW OR LOSS.
+                    playerScore++ ;
+                    compScore++ ;
+                } else if( result === ("You win! " + playerSelection + " beats " + computerSelection) ) {
+                    playerScore += 3;
+                } else if( result === "You lose! " + computerSelection + " beats " + playerSelection ) {
+                    compScore += 3;
+                }
+            }
+            return ( "GAME OVER! Player: " + playerScore + " Computer: " + compScore );
+        }
+
+        console.log( game() ); // SHOWS FINAL SCORE ON CONSOLE
+
+        </script>
+    </body>
+</html>
