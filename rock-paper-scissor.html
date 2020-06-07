@@ -4,7 +4,7 @@
 
 <head>
 	<meta charset="UTF-8">
-    <title>Rock Paper Scissors!</title>
+	<title>Rock Paper Scissors!</title>
 	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 	<meta name="generator" content="Geany 1.33" />
 </head>
@@ -24,10 +24,10 @@
 	let compScore = 0
 	
 	let messageDiv = document.createElement("div");
-    document.body.appendChild(messageDiv);
-    
-    let playerCounter = document.createElement("p");
-    playerCounter.textContent = "YOUR POINTS: " + playerScore;
+	document.body.appendChild(messageDiv);
+	
+	let playerCounter = document.createElement("p");
+	playerCounter.textContent = "YOUR POINTS: " + playerScore;
 	messageDiv.appendChild(playerCounter);   
 	
 	let computerCounter = document.createElement("p");	
@@ -35,27 +35,27 @@
 	messageDiv.appendChild(computerCounter);
 	
 	let playerMessage = document.createElement("p");
-    messageDiv.appendChild(playerMessage);
-    
-    let computerMessage = document.createElement("p");
-    messageDiv.appendChild(computerMessage);
-    
-    let result = document.createElement("p");
-   	messageDiv.appendChild(result);
-   	
-   	let finalResult = document.createElement("p");
-   	messageDiv.appendChild(finalResult);
-   	
+	messageDiv.appendChild(playerMessage);
+	
+	let computerMessage = document.createElement("p");
+	messageDiv.appendChild(computerMessage);
+	
+	let result = document.createElement("p");
+	messageDiv.appendChild(result);
+
+	let finalResult = document.createElement("p");
+	messageDiv.appendChild(finalResult);
+
 	const buttons = document.querySelectorAll('button');
 	
 	function computerPlay() {
-        let array = ["ROCK", "PAPER", "SCISSORS"];
-        let randomNum = Math.floor(Math.random() * 3);
-        let pick = array[randomNum];
-        return pick;
-    }
-        
-    let playerSelection = "";
+		let array = ["ROCK", "PAPER", "SCISSORS"];
+		let randomNum = Math.floor(Math.random() * 3);
+		let pick = array[randomNum];
+		return pick;
+	}
+		
+	let playerSelection = "";
 	buttons.forEach((button) => {
 		button.addEventListener('click', (e) => {
 			playerSelection = button.getAttribute('id');
@@ -63,36 +63,36 @@
 			result.textContent = game();
 		});
 	}); 
-    
-    function playRound(playerSelection, computerSelection) {
-        let message;          
+	
+	function playRound(playerSelection, computerSelection) {
+		let message;          
 		if (playerSelection === "") {
 			return;
-        } else if (playerSelection === computerSelection) {
-            message = "Draw! Nobody wins!";            
-        } else if (((playerSelection === "ROCK") && (computerSelection === "SCISSORS")) || 
-                   ((playerSelection === "SCISSORS") && (computerSelection === "PAPER")) || 
-                   ((playerSelection === "PAPER") && (computerSelection === "ROCK"))) {
-            message = ("You win! " + playerSelection + " beats " + computerSelection);
-            playerScore++;
-            if (playerScore === 5) {
+		} else if (playerSelection === computerSelection) {
+			message = "Draw! Nobody wins!";            
+		} else if (((playerSelection === "ROCK") && (computerSelection === "SCISSORS")) || 
+				   ((playerSelection === "SCISSORS") && (computerSelection === "PAPER")) || 
+				   ((playerSelection === "PAPER") && (computerSelection === "ROCK"))) {
+			message = ("You win! " + playerSelection + " beats " + computerSelection);
+			playerScore++;
+			if (playerScore === 5) {
 				let finalMessage = "GAME OVER! You: " + playerScore + " Computer: " + compScore + ". "; 
 				finalResult.textContent = finalMessage + "YOU WON, GG!";
 			}
-        } else {
-            message = ("You lose! " + computerSelection + " beats " + playerSelection);
-            compScore++;
-            if (compScore === 5) {
+		} else {
+			message = ("You lose! " + computerSelection + " beats " + playerSelection);
+			compScore++;
+			if (compScore === 5) {
 				let finalMessage = "GAME OVER! You: " + playerScore + " Computer: " + compScore + ". "; 
 				finalResult.textContent = finalMessage + "YOU LOST, GIT GUD!";
 			}
-        }
-        playerCounter.textContent = "YOUR POINTS: " + playerScore;
+		}
+		playerCounter.textContent = "YOUR POINTS: " + playerScore;
 		computerCounter.textContent = "CPU\'S POINTS: " + compScore;
 		return message;
-    }
-    
-    function game() {
+	}
+	
+	function game() {
 		if (playerScore === 5 || compScore === 5) {
 			return;
 		} else {
@@ -100,7 +100,7 @@
 			computerMessage.textContent = '> CPU: ' + computerSelection;
 			return playRound(playerSelection, computerSelection);
 		}
-	}    
+	}
 
  </script>	
 	
